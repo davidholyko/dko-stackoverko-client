@@ -9,6 +9,9 @@ import SignIn from './auth/components/SignIn'
 import SignOut from './auth/components/SignOut'
 import ChangePassword from './auth/components/ChangePassword'
 
+import Questions from './questions/components/Questions'
+import QuestionCreate from './questions/components/QuestionCreate'
+
 import Alert from 'react-bootstrap/Alert'
 
 class App extends Component {
@@ -43,18 +46,39 @@ class App extends Component {
           </Alert>
         ))}
         <main className="container">
+
+          { /* Auth routes */ }
           <Route path='/sign-up' render={() => (
             <SignUp alert={this.alert} setUser={this.setUser} />
           )} />
           <Route path='/sign-in' render={() => (
             <SignIn alert={this.alert} setUser={this.setUser} />
           )} />
-          <AuthenticatedRoute user={user} path='/sign-out' render={() => (
+          <AuthenticatedRoute path='/sign-out' user={user} render={() => (
             <SignOut alert={this.alert} clearUser={this.clearUser} user={user} />
           )} />
-          <AuthenticatedRoute user={user} path='/change-password' render={() => (
+          <AuthenticatedRoute path='/change-password' user={user} render={() => (
             <ChangePassword alert={this.alert} user={user} />
           )} />
+
+          { /* Questions routes */ }
+          <Route path='/questions' render={() => (
+            <Questions alert={this.alert} user={user} />
+          )} />
+          <Route path='/question-create' render={() => (
+            <QuestionCreate alert={this.alert} user={user} />
+          )} />
+          { /*
+          <Route path='/sign-in' render={() => (
+            <SignIn alert={this.alert} setUser={this.setUser} />
+          )} />
+          <AuthenticatedRoute path='/sign-out' user={user} render={() => (
+            <SignOut alert={this.alert} clearUser={this.clearUser} user={user} />
+          )} />
+          <AuthenticatedRoute path='/change-password' user={user} render={() => (
+            <ChangePassword alert={this.alert} user={user} />
+          )} />
+          */ }
         </main>
       </React.Fragment>
     )

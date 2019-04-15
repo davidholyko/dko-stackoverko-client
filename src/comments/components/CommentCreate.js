@@ -24,10 +24,10 @@ class CommentCreate extends Component {
   onCommentCreate = event => {
     event.preventDefault()
 
-    const { alert, user, questionID } = this.props
+    const { alert, user, questionID, createComment } = this.props
 
     postComment(user, this.state, questionID)
-      .then(console.log)
+      .then(responseData => createComment(responseData.data.comment))
       .then(() => alert(messages.signInSuccess, 'success'))
       .catch(error => {
         console.error(error)

@@ -17,6 +17,12 @@ class Comments extends Component {
 
   componentDidMount = () => { }
 
+  createComment = createdComment => {
+    const comments = this.state.comments
+    comments.push(createdComment)
+    this.setState({ comments })
+  }
+
   render () {
     const { user, alert, question } = this.props
     const { comments } = this.state
@@ -24,7 +30,7 @@ class Comments extends Component {
     return (
       <Fragment>
         <h1>Comments?????</h1>
-        <CommentCreate user={user} alert={alert} questionID={question.id}/>
+        <CommentCreate user={user} alert={alert} questionID={question.id} createComment={this.createComment}/>
         {comments
           ? comments.map((comment, index) => {
             return <Comment

@@ -32,6 +32,7 @@ class Question extends Component {
   render () {
     const { question, editable, deleted } = this.state
     const { user, alert } = this.props
+    const owned = question.creator === user.handle
 
     const questionEdit = <QuestionEdit
       question={question}
@@ -39,6 +40,8 @@ class Question extends Component {
       updateQuestion={this.updateQuestion}
       deleteQuestion={this.deleteQuestion}
       unmountEditable={this.unmountEditable}/>
+
+    const editButton = <button className="btn btn-info" onClick={this.toggleEditable}>Edit</button>
 
     if (deleted) { return '' }
 
@@ -50,8 +53,8 @@ class Question extends Component {
         <h1>ANONYMOUS: {question.anonymous}</h1>
         <h1>CREATOR: {question.creator}</h1>
         <Comments user={user} alert={alert} question={question}/>
-        <button className="btn btn-info" onClick={this.toggleEditable}>Edit</button>
-        { editable ? questionEdit : ''}
+        { owned ? editButton : '' }
+        { owned && editable ? questionEdit : ''}
       </QuestionWrapper>
     )
   }

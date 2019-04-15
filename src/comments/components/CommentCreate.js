@@ -8,8 +8,6 @@ class CommentCreate extends Component {
   constructor (props) {
     super(props)
 
-    console.log(this.props)
-
     this.state = {
       text: 'filler text',
       anonymous: false

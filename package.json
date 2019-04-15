@@ -1,6 +1,6 @@
 {
   "name": "react-auth-template",
-  "homepage": "https://davidholyko.github.io/stackoverko-client",
+  "homepage": "https://davidholyko.github.io/stackoverko",
   "version": "0.1.0",
   "private": true,
   "dependencies": {

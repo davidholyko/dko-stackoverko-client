@@ -32,6 +32,7 @@ class Question extends Component {
 
   render () {
     const { question, editable } = this.state
+    const { user } = this.props
 
     return (
       <QuestionWrapper>
@@ -40,7 +41,7 @@ class Question extends Component {
         <h1>{question.anonymous}</h1>
         <h1>{question.creator}</h1>
         <button className="btn btn-info" onClick={this.toggleEditable}>Edit</button>
-        { editable ? <QuestionEdit question={question}/> : ''}
+        { editable ? <QuestionEdit question={question} user={user}/> : ''}
       </QuestionWrapper>
     )
   }

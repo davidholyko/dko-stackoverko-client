@@ -37,6 +37,7 @@ class Questions extends Component {
 
   render () {
     const { questions, rendered } = this.state
+    const { user } = this.props
 
     if (!rendered) {
       return <Spinner animation="border"></Spinner>
@@ -44,7 +45,7 @@ class Questions extends Component {
 
     return (
       <Fragment>
-        {questions.map((question, index) => <Question key={index} question={question}/>)}
+        {questions.map((question, index) => <Question key={index} question={question} user={user}/>)}
       </Fragment>
     )
   }

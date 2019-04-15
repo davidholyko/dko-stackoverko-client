@@ -2,6 +2,9 @@ import React, { Component } from 'react'
 import { withRouter } from 'react-router-dom'
 import styled from 'styled-components'
 
+import { patchQuestion, deleteQuestion } from '../api'
+import messages from '../messages'
+
 const QuestionEdit = styled.div`
   background-color: green;
   color: white;
@@ -16,6 +19,7 @@ class Question extends Component {
       question: {
         title: '',
         body: '',
+        id: false,
         anonymous: false
       }
     }
@@ -27,7 +31,35 @@ class Question extends Component {
   }
 
   toggleEditable = () => this.setState({ editable: !this.state.editable })
-  handleChange = event => this.setState({ question: { [event.target.name]: event.target.value } })
+
+  handleChange = event => this.setState({ question: {
+    ...this.state.question,
+    [event.target.name]: event.target.value }
+  })
+
+  onQuestionUpdate = () => {
+    console.log(this.state)
+    event.preventDefault()
+    const { question } = this.state
+    const { user } = this.props
+    patchQuestion(user, question)
+      .then(data => { console.log(data); return data })
+      .catch(error => {
+        console.error(error)
+        this.setState({ title: '', body: '' })
+        alert(messages.signInFailure, 'danger')
+      })
+  }
+
+  onQuestionDelete = () => {
+    event.preventDefault()
+
+    const { question } = this.state
+    const { user } = this.props
+    deleteQuestion(user, question)
+      .then(console.log)
+      .catch(console.log)
+  }
 
   render () {
     const { question } = this.state
@@ -43,8 +75,8 @@ class Question extends Component {
           <textarea required type="text" name="body" value={question.body} onChange={this.handleChange}>
             {question.body}
           </textarea>
-          <button>Create A Question</button>
-          <button>Delete</button>
+          <button>Update</button>
+          <button onClick={this.onQuestionDelete}>Delete</button>
         </form>
       </QuestionEdit>
     )

@@ -1,55 +1,50 @@
 import apiUrl from '../apiConfig'
 import axios from 'axios'
 
-export const signUp = credentials => {
+export const postComment = (user, data, id) => {
   return axios({
+    url: `${apiUrl}/comments`,
     method: 'POST',
-    url: apiUrl + '/sign-up',
+    headers: { 'Authorization': `Token token=${user.token}` },
     data: {
-      credentials: {
-        email: credentials.email,
-        password: credentials.password,
-        password_confirmation: credentials.passwordConfirmation
+      comment: {
+        text: data.text,
+        anonymous: data.anonymous,
+        question_id: id
       }
     }
   })
 }
 
-export const signIn = credentials => {
+export const patchComment = (user, data, id) => {
+  console.log(data)
   return axios({
-    url: apiUrl + '/sign-in',
-    method: 'POST',
-    data: {
-      credentials: {
-        email: credentials.email,
-        password: credentials.password
-      }
-    }
-  })
-}
-
-export const signOut = user => {
-  return axios({
-    url: apiUrl + '/sign-out',
-    method: 'DELETE',
-    headers: {
-      'Authorization': `Token token=${user.token}`
-    }
-  })
-}
-
-export const changePassword = (passwords, user) => {
-  return axios({
-    url: apiUrl + '/change-password',
+    url: `${apiUrl}/comments/${data.id}`,
     method: 'PATCH',
-    headers: {
-      'Authorization': `Token token=${user.token}`
-    },
+    headers: { 'Authorization': `Token token=${user.token}` },
     data: {
-      passwords: {
-        old: passwords.oldPassword,
-        new: passwords.newPassword
+      comment: {
+        text: data.text,
+        anonymous: data.anonymous,
+        question_id: id
       }
     }
+  })
+}
+
+export const deleteComment = (user, data) => {
+  console.log(data.id)
+  return axios({
+    url: `${apiUrl}/comments/${data.id}`,
+    method: 'DELETE',
+    headers: { 'Authorization': `Token token=${user.token}` }
+  })
+}
+
+export const indexComments = user => {
+  return axios({
+    url: `${apiUrl}/comments`,
+    method: 'GET',
+    headers: { 'Authorization': `Token token=${user.token}` }
   })
 }

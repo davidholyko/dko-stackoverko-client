@@ -21,13 +21,19 @@ class Questions extends Component {
     this.onIndexQuestions()
   }
 
+  sortByID = (a, b) => a.id - b.id
+
   onIndexQuestions = () => {
     const { user, alert } = this.props
 
     indexQuestions(user)
-      .then(data => { console.log(data); return data })
-      .then(responseData => this.setState({ questions: responseData.data.questions, rendered: true }))
+      // .then(data => { console.log(data); return data })
+      .then(responseData => this.setState({
+        questions: responseData.data.questions.sort(this.sortByID),
+        rendered: true
+      }))
       .then(() => alert(messages.signInSuccess, 'success'))
+      // .then(() => console.log(this.state))
       .catch(error => {
         console.error(error)
         this.setState({ email: '', password: '' })
@@ -37,7 +43,7 @@ class Questions extends Component {
 
   render () {
     const { questions, rendered } = this.state
-    const { user } = this.props
+    const { user, alert } = this.props
 
     if (!rendered) {
       return <Spinner animation="border"></Spinner>
@@ -45,7 +51,7 @@ class Questions extends Component {
 
     return (
       <Fragment>
-        {questions.map((question, index) => <Question key={index} question={question} user={user}/>)}
+        {questions.map((question, index) => <Question key={index} alert={alert} question={question} user={user}/>)}
       </Fragment>
     )
   }

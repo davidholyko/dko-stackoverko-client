@@ -3,45 +3,55 @@ import { withRouter } from 'react-router-dom'
 import styled from 'styled-components'
 
 import QuestionEdit from './QuestionEdit'
+import Comments from '../../comments/components/Comments'
 
 const QuestionWrapper = styled.div`
+  margin: 1rem;
   background-color: black;
   color: white;
 `
 
 class Question extends Component {
-  constructor () {
-    super()
+  constructor (props) {
+    super(props)
+
+    const { question } = this.props
 
     this.state = {
+      deleted: false,
       editable: false,
-      question: {
-        title: '',
-        body: '',
-        anonymous: false
-      }
+      question
     }
   }
 
-  componentDidMount () {
-    const { question } = this.props
-    this.setState({ question })
-  }
-
   toggleEditable = () => this.setState({ editable: !this.state.editable })
+  unmountEditable = () => this.setState({ editable: !this.state.editable })
+  deleteQuestion = () => this.setState({ deleted: true })
+  updateQuestion = updatedQuestion => this.setState({ question: updatedQuestion })
 
   render () {
-    const { question, editable } = this.state
-    const { user } = this.props
+    const { question, editable, deleted } = this.state
+    const { user, alert } = this.props
+
+    const questionEdit = <QuestionEdit
+      question={question}
+      user={user}
+      updateQuestion={this.updateQuestion}
+      deleteQuestion={this.deleteQuestion}
+      unmountEditable={this.unmountEditable}/>
+
+    if (deleted) { return '' }
 
     return (
       <QuestionWrapper>
-        <h1>{question.title}</h1>
-        <h1>{question.body}</h1>
-        <h1>{question.anonymous}</h1>
-        <h1>{question.creator}</h1>
+        <h1>ID: {question.id}</h1>
+        <h1>TITLE: {question.title}</h1>
+        <h1>BODY: {question.body}</h1>
+        <h1>ANONYMOUS: {question.anonymous}</h1>
+        <h1>CREATOR: {question.creator}</h1>
+        <Comments user={user} alert={alert} question={question}/>
         <button className="btn btn-info" onClick={this.toggleEditable}>Edit</button>
-        { editable ? <QuestionEdit question={question} user={user}/> : ''}
+        { editable ? questionEdit : ''}
       </QuestionWrapper>
     )
   }

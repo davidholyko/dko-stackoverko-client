@@ -8,6 +8,8 @@ import messages from '../messages'
 const QuestionEdit = styled.div`
   background-color: green;
   color: white;
+  display: flex;
+  flex-direction: column;
 `
 
 class Question extends Component {
@@ -15,6 +17,7 @@ class Question extends Component {
     super()
 
     this.state = {
+      exists: true,
       editable: false,
       question: {
         title: '',
@@ -38,12 +41,13 @@ class Question extends Component {
   })
 
   onQuestionUpdate = () => {
-    console.log(this.state)
     event.preventDefault()
     const { question } = this.state
-    const { user } = this.props
+    const { user, updateQuestion, unmountEditable } = this.props
     patchQuestion(user, question)
-      .then(data => { console.log(data); return data })
+      // .then(data => { console.log(data); return data })
+      .then(unmountEditable)
+      .then(() => updateQuestion(question))
       .catch(error => {
         console.error(error)
         this.setState({ title: '', body: '' })
@@ -57,8 +61,8 @@ class Question extends Component {
     const { question } = this.state
     const { user } = this.props
     deleteQuestion(user, question)
-      .then(console.log)
-      .catch(console.log)
+      .then(this.props.deleteQuestion)
+      .catch(console.error)
   }
 
   render () {
@@ -66,7 +70,7 @@ class Question extends Component {
 
     return (
       <QuestionEdit>
-        <form onSubmit={this.onQuestionUpdate}>
+        <form onSubmit={this.onQuestionUpdate} className="d-flex flex-column p-3">
           <label htmlFor="title">Title</label>
           <textarea required type="text" name="title" value={question.title} onChange={this.handleChange}>
             {question.title}
@@ -75,8 +79,10 @@ class Question extends Component {
           <textarea required type="text" name="body" value={question.body} onChange={this.handleChange}>
             {question.body}
           </textarea>
-          <button>Update</button>
-          <button onClick={this.onQuestionDelete}>Delete</button>
+          <div className="d-flex justify-content-between w-100">
+            <button className="btn btn-success">Update</button>
+            <button className="btn btn-danger" onClick={this.onQuestionDelete}>Delete</button>
+          </div>
         </form>
       </QuestionEdit>
     )

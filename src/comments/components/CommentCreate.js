@@ -9,6 +9,7 @@ class CommentCreate extends Component {
     super(props)
 
     this.state = {
+      questionID: this.props.question_id,
       text: 'filler text',
       anonymous: false
     }
@@ -22,9 +23,9 @@ class CommentCreate extends Component {
   onCommentCreate = event => {
     event.preventDefault()
 
-    const { alert, user, questionID, createComment } = this.props
+    const { alert, user, question, createComment } = this.props
 
-    postComment(user, this.state, questionID)
+    postComment(user, this.state, question.id)
       .then(responseData => createComment(responseData.data.comment))
       .then(() => alert(messages.signInSuccess, 'success'))
       .catch(error => {
@@ -35,7 +36,8 @@ class CommentCreate extends Component {
   }
 
   render () {
-    const { text, id } = this.state
+    const { text } = this.state
+    const { id } = this.props.question
 
     return (
       <form onSubmit={this.onCommentCreate} className="d-flex flex-column bg-primary text-light p-3">

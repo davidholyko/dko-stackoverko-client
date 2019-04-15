@@ -35,7 +35,7 @@ class Comments extends Component {
         <CommentCreate
           user={user}
           alert={alert}
-          questionID={question.id}
+          question={question}
           createComment={this.createComment}/>
 
         {comments
@@ -45,7 +45,7 @@ class Comments extends Component {
               comment={comment}
               user={user}
               alert={alert}
-              questionID={question.id}/>
+              question={question}/>
           })
           : ''}
       </Fragment>

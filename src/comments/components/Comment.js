@@ -14,9 +14,12 @@ class Comment extends Component {
   constructor (props) {
     super(props)
 
-    const { comment } = this.props
+    const { comment, question } = this.props
+
+    console.log(this.props)
 
     this.state = {
+      questionID: question.id,
       deleted: false,
       editable: false,
       comment
@@ -33,7 +36,7 @@ class Comment extends Component {
 
   render () {
     const { comment, editable, deleted } = this.state
-    const { user } = this.props
+    const { user, question } = this.props
     const owned = comment.creator === user.handle
 
     const commentEdit = <CommentEdit
@@ -51,7 +54,8 @@ class Comment extends Component {
       <CommentWrapper>
         <h1>CREATOR: {comment.creator}</h1>
         <h1>TEXT: {comment.text}</h1>
-        <h1>ANONYMOUS: {comment.anonymous}</h1>
+        <h1>ANONYMOUS: {comment.anonymous.toString()}</h1>
+        <h1>QUESTION ID: {question.id}</h1>
         { owned ? editButton : ''}
         { owned && editable ? commentEdit : ''}
       </CommentWrapper>

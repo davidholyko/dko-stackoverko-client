@@ -42,7 +42,6 @@ class Question extends Component {
   }
 
   componentDidMount () {
-    console.log(this.props)
     if (!this.props.match.params.id) { return '' }
     this.showOneQuestion()
   }
@@ -53,7 +52,7 @@ class Question extends Component {
 
     if (!rendered) { return '' }
 
-    const owned = question.creator === user.handle
+    const owned = user ? question.creator === user.handle : false
 
     const questionEdit = <QuestionEdit
       question={question}

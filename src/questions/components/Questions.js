@@ -31,7 +31,7 @@ class Questions extends Component {
         questions: responseData.data.questions.sort(this.sortByID),
         rendered: true
       }))
-      .then(() => alert(messages.questionsReadSuccess, 'success'))
+      // .then(() => alert(messages.questionsReadSuccess, 'success'))
       .catch(error => {
         console.error(error)
         this.setState({ email: '', password: '' })
@@ -43,9 +43,7 @@ class Questions extends Component {
     const { questions, rendered } = this.state
     const { user, alert } = this.props
 
-    if (!rendered) {
-      return <Spinner animation="border"></Spinner>
-    }
+    if (!rendered) { return <Spinner animation="border"></Spinner> }
 
     return (
       <Fragment>

@@ -14,7 +14,8 @@ import Question from './questions/components/Question'
 import Questions from './questions/components/Questions'
 import QuestionCreate from './questions/components/QuestionCreate'
 
-import Alert from 'react-bootstrap/Alert'
+// import Alert from 'react-bootstrap/Alert'
+import { AlertList } from 'react-bs-notifier'
 
 class App extends Component {
   constructor () {
@@ -22,7 +23,9 @@ class App extends Component {
 
     this.state = {
       user: null,
-      alerts: []
+      alerts: [],
+      timeout: 2000,
+      position: 'bottom-left'
     }
   }
 
@@ -30,22 +33,41 @@ class App extends Component {
 
   clearUser = () => this.setState({ user: null })
 
-  alert = (message, type) => {
-    const { alerts } = this.state
+  alert = (message, type, headline = '', timeout = 2000) => {
+    const newAlert = {
+      id: (new Date()).getTime(),
+      type: type,
+      headline: headline,
+      message: message
+    }
 
-    this.setState({ alerts: [...alerts, { message, type }] })
-
-    setTimeout(() => {
-      this.setState({ alerts: [] })
-    }, 2000)
+    this.setState(prevState => ({
+      alerts: [...prevState.alerts, newAlert]
+    }), () => {
+      setTimeout(() => {
+        const index = this.state.alerts.indexOf(newAlert)
+        if (index >= 0) {
+          this.setState(prevState => ({
+            // remove the alert from the array
+            alerts: [...prevState.alerts.slice(0, index), ...prevState.alerts.slice(index + 1)]
+          }))
+        }
+      }, timeout)
+    })
   }
 
   render () {
-    const { alerts, user } = this.state
+    const { alerts, user, timeout, position } = this.state
 
     return (
       <React.Fragment>
         <Header user={user} />
+
+        <AlertList
+          position={position}
+          alerts={alerts}
+          timeout={timeout}
+        />
 
         <main className="container">
 
@@ -64,11 +86,16 @@ class App extends Component {
           )} />
 
           { /* Questions routes */ }
+
+          <Route exact path='/' render={() => (
+            <Questions alert={this.alert} user={user} />
+          )} />
+
           <Route exact path='/questions' render={() => (
             <Questions alert={this.alert} user={user} />
           )} />
 
-          <Route path='/questions/:id' render={({ match }) => (
+          <Route exact path='/questions/:id' render={({ match }) => (
             <Question alert={this.alert} user={user} />
           )} />
           <Route exact path='/question-create' render={() => (
@@ -76,15 +103,11 @@ class App extends Component {
           )} />
         </main>
 
-        <div id="footer" className="fixed-bottom d-flex flex-column">
-          {alerts.map((alert, index) => (
-            <Alert key={index} variant={alert.type} className="animated fadeIn">
-              <Alert.Heading>
-                {alert.message}
-              </Alert.Heading>
-            </Alert>
-          ))}
-        </div>
+        <AlertList
+          position={position}
+          alerts={alerts}
+          timeout={timeout}
+        />
 
       </React.Fragment>
     )

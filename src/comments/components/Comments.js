@@ -27,15 +27,17 @@ class Comments extends Component {
     const { user, alert, question } = this.props
     const { comments } = this.state
 
+    const commentCreateForm = <CommentCreate
+      user={user}
+      alert={alert}
+      question={question}
+      createComment={this.createComment}/>
+
     return (
       <Fragment>
         <h1>Comments?????</h1>
 
-        <CommentCreate
-          user={user}
-          alert={alert}
-          question={question}
-          createComment={this.createComment}/>
+        {user ? commentCreateForm : ''}
 
         {comments
           ? comments.map((comment, index) => {

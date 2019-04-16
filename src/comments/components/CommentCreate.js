@@ -27,7 +27,7 @@ class CommentCreate extends Component {
 
     postComment(user, this.state, question.id)
       .then(responseData => createComment(responseData.data.comment))
-      .then(() => alert(messages.signInSuccess, 'success'))
+      .then(() => alert(messages.commentCreateSuccess, 'success'))
       .catch(error => {
         console.error(error)
         this.setState({ text: '' })

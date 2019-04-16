@@ -35,7 +35,7 @@ class Comment extends Component {
   render () {
     const { comment, editable, deleted } = this.state
     const { user, question } = this.props
-    const owned = comment.creator === user.handle
+    const owned = user ? comment.creator === user.handle : false
 
     const commentEdit = <CommentEdit
       comment={comment}

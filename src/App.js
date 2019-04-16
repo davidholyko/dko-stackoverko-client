@@ -4,11 +4,13 @@ import { Route } from 'react-router-dom'
 
 import AuthenticatedRoute from './auth/components/AuthenticatedRoute'
 import Header from './header/Header'
+
 import SignUp from './auth/components/SignUp'
 import SignIn from './auth/components/SignIn'
 import SignOut from './auth/components/SignOut'
 import ChangePassword from './auth/components/ChangePassword'
 
+import Question from './questions/components/Question'
 import Questions from './questions/components/Questions'
 import QuestionCreate from './questions/components/QuestionCreate'
 
@@ -62,17 +64,21 @@ class App extends Component {
           )} />
 
           { /* Questions routes */ }
-          <Route path='/questions' render={() => (
+          <Route exact path='/questions' render={() => (
             <Questions alert={this.alert} user={user} />
           )} />
-          <Route path='/question-create' render={() => (
+
+          <Route path='/questions/:id' render={({ match }) => (
+            <Question alert={this.alert} user={user} />
+          )} />
+          <Route exact path='/question-create' render={() => (
             <QuestionCreate alert={this.alert} user={user} />
           )} />
         </main>
 
-        <div id="footer" className="fixed-bottom animated fadeIn d-flex flex-column">
+        <div id="footer" className="fixed-bottom d-flex flex-column">
           {alerts.map((alert, index) => (
-            <Alert key={index} variant={alert.type}>
+            <Alert key={index} variant={alert.type} className="animated fadeIn">
               <Alert.Heading>
                 {alert.message}
               </Alert.Heading>

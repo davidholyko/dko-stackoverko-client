@@ -27,13 +27,11 @@ class Questions extends Component {
     const { user, alert } = this.props
 
     indexQuestions(user)
-      // .then(data => { console.log(data); return data })
       .then(responseData => this.setState({
         questions: responseData.data.questions.sort(this.sortByID),
         rendered: true
       }))
-      .then(() => alert(messages.signInSuccess, 'success'))
-      // .then(() => console.log(this.state))
+      .then(() => alert(messages.questionsReadSuccess, 'success'))
       .catch(error => {
         console.error(error)
         this.setState({ email: '', password: '' })
@@ -51,7 +49,7 @@ class Questions extends Component {
 
     return (
       <Fragment>
-        {questions.map((question, index) => <Question key={index} alert={alert} question={question} user={user}/>)}
+        {questions.map((question, index) => <Question key={index} alert={alert} question={question} user={user} rendered={true}/>)}
       </Fragment>
     )
   }

@@ -23,7 +23,7 @@ class QuestionCreate extends Component {
     const { alert, user } = this.props
 
     postQuestion(user, this.state)
-      .then(() => alert(messages.signInSuccess, 'success'))
+      .then(() => alert(messages.questionCreateSuccess, 'success'))
       .catch(error => {
         console.error(error)
         this.setState({ title: '', body: '' })

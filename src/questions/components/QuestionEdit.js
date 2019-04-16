@@ -45,13 +45,13 @@ class Question extends Component {
     const { question } = this.state
     const { user, updateQuestion, unmountEditable } = this.props
     patchQuestion(user, question)
-      // .then(data => { console.log(data); return data })
       .then(unmountEditable)
       .then(() => updateQuestion(question))
+      .then(() => alert(messages.questionUpdateSuccess, 'success'))
       .catch(error => {
         console.error(error)
         this.setState({ title: '', body: '' })
-        alert(messages.signInFailure, 'danger')
+        alert(messages.questionUpdateFailure, 'danger')
       })
   }
 
@@ -62,7 +62,7 @@ class Question extends Component {
 
     deleteQuestion(user, question)
       .then(this.props.deleteQuestion)
-      .then(() => alert(messages.signInSuccess, 'success'))
+      .then(() => alert(messages.questionDeleteSuccess, 'success'))
       .catch(console.error)
   }
 

@@ -17,7 +17,6 @@ export const postComment = (user, data, id) => {
 }
 
 export const patchComment = (user, data, id) => {
-  console.log(data)
   return axios({
     url: `${apiUrl}/comments/${data.id}`,
     method: 'PATCH',
@@ -33,7 +32,6 @@ export const patchComment = (user, data, id) => {
 }
 
 export const deleteComment = (user, data) => {
-  console.log(data.id)
   return axios({
     url: `${apiUrl}/comments/${data.id}`,
     method: 'DELETE',

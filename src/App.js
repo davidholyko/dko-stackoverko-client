@@ -29,7 +29,13 @@ class App extends Component {
   clearUser = () => this.setState({ user: null })
 
   alert = (message, type) => {
-    this.setState({ alerts: [...this.state.alerts, { message, type }] })
+    const { alerts } = this.state
+
+    this.setState({ alerts: [...alerts, { message, type }] })
+
+    setTimeout(() => {
+      this.setState({ alerts: [] })
+    }, 2000)
   }
 
   render () {
@@ -38,13 +44,7 @@ class App extends Component {
     return (
       <React.Fragment>
         <Header user={user} />
-        {alerts.map((alert, index) => (
-          <Alert key={index} dismissible variant={alert.type}>
-            <Alert.Heading>
-              {alert.message}
-            </Alert.Heading>
-          </Alert>
-        ))}
+
         <main className="container">
 
           { /* Auth routes */ }
@@ -68,18 +68,18 @@ class App extends Component {
           <Route path='/question-create' render={() => (
             <QuestionCreate alert={this.alert} user={user} />
           )} />
-          { /*
-          <Route path='/sign-in' render={() => (
-            <SignIn alert={this.alert} setUser={this.setUser} />
-          )} />
-          <AuthenticatedRoute path='/sign-out' user={user} render={() => (
-            <SignOut alert={this.alert} clearUser={this.clearUser} user={user} />
-          )} />
-          <AuthenticatedRoute path='/change-password' user={user} render={() => (
-            <ChangePassword alert={this.alert} user={user} />
-          )} />
-          */ }
         </main>
+
+        <div id="footer" className="fixed-bottom animated fadeIn d-flex flex-column">
+          {alerts.map((alert, index) => (
+            <Alert key={index} variant={alert.type}>
+              <Alert.Heading>
+                {alert.message}
+              </Alert.Heading>
+            </Alert>
+          ))}
+        </div>
+
       </React.Fragment>
     )
   }

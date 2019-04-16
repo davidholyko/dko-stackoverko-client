@@ -16,8 +16,6 @@ class Comment extends Component {
 
     const { comment, question } = this.props
 
-    console.log(this.props)
-
     this.state = {
       questionID: question.id,
       deleted: false,

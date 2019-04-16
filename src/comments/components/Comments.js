@@ -13,7 +13,6 @@ class Comments extends Component {
     this.state = {
       comments
     }
-    console.log(this.state)
   }
 
   componentDidMount = () => { }

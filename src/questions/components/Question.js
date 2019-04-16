@@ -37,6 +37,7 @@ class Question extends Component {
     const questionEdit = <QuestionEdit
       question={question}
       user={user}
+      alert={alert}
       updateQuestion={this.updateQuestion}
       deleteQuestion={this.deleteQuestion}
       unmountEditable={this.unmountEditable}/>

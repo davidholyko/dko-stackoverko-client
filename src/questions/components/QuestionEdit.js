@@ -57,11 +57,12 @@ class Question extends Component {
 
   onQuestionDelete = () => {
     event.preventDefault()
-
     const { question } = this.state
-    const { user } = this.props
+    const { user, alert } = this.props
+
     deleteQuestion(user, question)
       .then(this.props.deleteQuestion)
+      .then(() => alert(messages.signInSuccess, 'success'))
       .catch(console.error)
   }
 

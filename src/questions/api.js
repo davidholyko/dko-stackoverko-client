@@ -17,7 +17,6 @@ export const postQuestion = (user, data) => {
 }
 
 export const patchQuestion = (user, data) => {
-  console.log(data)
   return axios({
     url: `${apiUrl}/questions/${data.id}`,
     method: 'PATCH',
@@ -33,7 +32,6 @@ export const patchQuestion = (user, data) => {
 }
 
 export const deleteQuestion = (user, data) => {
-  console.log(data.id)
   return axios({
     url: `${apiUrl}/questions/${data.id}`,
     method: 'DELETE',

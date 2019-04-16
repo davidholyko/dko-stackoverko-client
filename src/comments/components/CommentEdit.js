@@ -41,7 +41,6 @@ class CommentEdit extends Component {
   })
 
   onCommentUpdate = () => {
-    console.log(this.state)
     event.preventDefault()
     const { comment } = this.state
     const { user, updateComment, unmountEditable } = this.props

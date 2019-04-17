@@ -25,7 +25,7 @@ class App extends Component {
       user: null,
       alerts: [],
       timeout: 2000,
-      position: 'bottom-left'
+      position: 'bottom-right'
     }
   }
 

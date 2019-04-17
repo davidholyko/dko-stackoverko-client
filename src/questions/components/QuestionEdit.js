@@ -43,7 +43,7 @@ class Question extends Component {
   onQuestionUpdate = () => {
     event.preventDefault()
     const { question } = this.state
-    const { user, updateQuestion, unmountEditable } = this.props
+    const { user, updateQuestion, unmountEditable, alert } = this.props
     patchQuestion(user, question)
       .then(unmountEditable)
       .then(() => updateQuestion(question))

@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { withRouter } from 'react-router-dom'
+import { withRouter, Redirect } from 'react-router-dom'
 
 import { postQuestion } from '../api'
 import messages from '../messages'
@@ -9,8 +9,13 @@ class QuestionCreate extends Component {
     super()
 
     this.state = {
-      title: 'filler title',
-      body: 'filler body',
+      redirect: false,
+      title: '',
+      summary: '',
+      background: '',
+      code: '',
+      description: '',
+      body: '',
       anonymous: false
     }
   }
@@ -22,38 +27,80 @@ class QuestionCreate extends Component {
 
     const { alert, user } = this.props
 
-    postQuestion(user, this.state)
+    const { summary, background, code, description } = this.state
+    const body =
+    `${summary}\n
+    ${background}\n
+    <pre><code className="language-javascript">${code}</code></pre>\n
+    ${description}`
+
+    postQuestion(user, { ...this.state, body })
       .then(() => alert(messages.questionCreateSuccess, 'success'))
-      .catch(error => {
-        console.error(error)
+      .then(() => this.setState({ redirect: true }))
+      .catch(() => {
         this.setState({ title: '', body: '' })
         alert(messages.signInFailure, 'danger')
       })
   }
 
   render () {
-    const { title, body } = this.state
+    const { title, summary, background, code, description, redirect } = this.state
+
+    if (redirect) {
+      return <Redirect to="/"></Redirect>
+    }
 
     return (
-      <form onSubmit={this.onQuestionCreate}>
+      <form onSubmit={this.onQuestionCreate} className="d-flex flex-column">
         <label htmlFor="title">Title</label>
-        <input
+        <textarea
           required
           type="text"
           name="title"
           value={title}
           placeholder="Title"
           onChange={this.handleChange}
-        />
-        <label htmlFor="body">Body</label>
-        <input
+        ></textarea>
+        <label htmlFor="body">Summarize the problem</label>
+        <textarea
           required
-          name="body"
-          value={body}
+          name="summary"
+          value={summary}
           type="text"
-          placeholder="Body"
+          placeholder="Summarize the problem here"
+          className="textarea-body"
           onChange={this.handleChange}
-        />
+        ></textarea>
+        <label htmlFor="background">Provide background including what you&#39;ve already tried</label>
+        <textarea
+          required
+          name="background"
+          value={background}
+          type="text"
+          placeholder="Include any research you've conducted"
+          className="textarea-body"
+          onChange={this.handleChange}
+        ></textarea>
+        <label htmlFor="code">Show some code</label>
+        <textarea
+          required
+          name="code"
+          value={code}
+          type="text"
+          placeholder="Share as little code as possible that still produces the same problem"
+          className="textarea-body"
+          onChange={this.handleChange}
+        ></textarea>
+        <label htmlFor="description">Describe expected and actual results</label>
+        <textarea
+          required
+          name="description"
+          value={description}
+          type="text"
+          placeholder="Describe expected and actual results"
+          className="textarea-body"
+          onChange={this.handleChange}
+        ></textarea>
         <button>Create A Question</button>
       </form>
     )

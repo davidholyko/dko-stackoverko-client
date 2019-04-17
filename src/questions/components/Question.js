@@ -46,6 +46,7 @@ class Question extends Component {
     const { id } = this.state.question.likes.find(like => like.user_id === user.id)
     this.setState({ liked: !this.state.liked })
     questionLikeDelete(user, id)
+      .then(this.showOneQuestion)
       .then(() => alert(messages.questionUnlikeSuccess, 'success'))
       .catch(() => { alert(messages.questionUnlikeFailure, 'danger') })
   }
@@ -55,9 +56,7 @@ class Question extends Component {
   updateQuestion = updatedQuestion => this.setState({ question: updatedQuestion })
 
   setupLike = () => {
-    console.log('setupLike')
     const { user } = this.props
-    console.log(this.state)
     const likedByUser = this.state.question.likes.find(like => like.user_id === user.id)
     if (likedByUser) {
       this.setState({ liked: true })
@@ -67,13 +66,12 @@ class Question extends Component {
   }
 
   showOneQuestion = () => {
-    console.log('showOneQuestion')
     const { user } = this.props
     const { id } = this.props.match.params
     showQuestion(user, id)
-      .then(data => { console.log(data); return data })
+      // .then(data => { console.log(data); return data })
       .then(responseData => this.setState({ question: responseData.data.question, rendered: true }))
-      .then(() => console.log(this.state))
+      // .then(() => console.log(this.state))
       .then(user ? this.setupLike : '')
       .catch(console.error)
   }
@@ -113,6 +111,7 @@ class Question extends Component {
         <h1>BODY: {question.body}</h1>
         <h1>ANONYMOUS: {question.anonymous}</h1>
         <h1>CREATOR: {question.creator}</h1>
+        <h1 className="d-flex">liked by {question.likes.map((like, index) => <span key={index} className="mx-1">{like.creator},</span>)}</h1>
         { user ? liked ? unlikeButton : likeButton : '' }
         { owned ? editButton : '' }
         { owned && editable ? questionEdit : ''}

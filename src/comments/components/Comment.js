@@ -42,7 +42,8 @@ class Comment extends Component {
       user={user}
       deleteComment={this.deleteComment}
       updateComment={this.updateComment}
-      unmountEditable={this.unmountEditable}/>
+      unmountEditable={this.unmountEditable}
+      value={comment.text}/>
 
     const editButton = <button className="btn btn-info" onClick={this.toggleEditable}>Edit</button>
 

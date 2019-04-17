@@ -4,23 +4,12 @@ body {
   padding: 0;
 }
 
-.alert {
-  margin: 30px;
+h1 {
+  word-wrap: break-word;
+  word-break: break-all;
+  white-space: pre-line;
 }
-// .fadeInOut {
-//   animation: fadeInOut 2s ease-in-out;
-//   @keyframes fadeInOut {
-//     0%,
-//     100% {
-//       opacity: 0;
-//     }
-//
-//     25% {
-//       opacity: 1;
-//     }
-//
-//     75% {
-//       opacity: 1;
-//     }
-//   }
-// }
+
+textarea[class="textarea-body"] {
+  height: 300px;
+}

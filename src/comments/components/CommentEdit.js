@@ -20,8 +20,7 @@ class CommentEdit extends Component {
       exists: true,
       editable: false,
       comment: {
-        title: '',
-        body: '',
+        text: '',
         id: false,
         anonymous: false
       }
@@ -67,14 +66,13 @@ class CommentEdit extends Component {
 
   render () {
     const { comment } = this.state
+    // const { value } = this.props
 
     return (
       <CommentEditWrapper>
         <form onSubmit={this.onCommentUpdate} className="d-flex flex-column p-3">
-          <label htmlFor="title">Title</label>
-          <textarea required type="text" name="text" value={comment.text} onChange={this.handleChange}>
-            {comment.title}
-          </textarea>
+          <label htmlFor="title">Comment Text</label>
+          <textarea required type="text" name="text" value={comment.text} onChange={this.handleChange}/>
           <div className="d-flex justify-content-between w-100">
             <button className="btn btn-success">Update</button>
             <button className="btn btn-danger" onClick={this.onCommentDelete}>Delete</button>

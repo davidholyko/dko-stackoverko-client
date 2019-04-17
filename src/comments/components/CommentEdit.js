@@ -72,7 +72,7 @@ class CommentEdit extends Component {
       <CommentEditWrapper>
         <form onSubmit={this.onCommentUpdate} className="d-flex flex-column p-3">
           <label htmlFor="title">Title</label>
-          <textarea required type="text" name="text" value={comment.title} onChange={this.handleChange}>
+          <textarea required type="text" name="text" value={comment.text} onChange={this.handleChange}>
             {comment.title}
           </textarea>
           <div className="d-flex justify-content-between w-100">

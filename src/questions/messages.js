@@ -6,6 +6,9 @@ export default {
   questionDeleteSuccess: 'Successfully deleted a question',
   questionDeleteFailure: 'Unsuccessfully deleted a question',
   questionsReadSuccess: 'Successfully got questions',
-  questionsReadFailure: 'Unsuccessfully got questions'
-
+  questionsReadFailure: 'Unsuccessfully got questions',
+  questionLikeSuccess: 'Successfully liked a question',
+  questionLikeFailure: 'Unsuccessfully liked a question',
+  questionUnlikeSuccess: 'Successfully unliked a question',
+  questionUnlikeFailure: 'Unsuccessfully unliked a question'
 }

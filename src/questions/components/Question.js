@@ -1,10 +1,11 @@
 import React, { Component } from 'react'
-import { withRouter, Link } from 'react-router-dom'
+import { withRouter } from 'react-router-dom'
 import styled from 'styled-components'
 
 import QuestionEdit from './QuestionEdit'
 import Comments from '../../comments/components/Comments'
-import { showQuestion } from '../api'
+import { showQuestion, questionLikeCreate, questionLikeDelete } from '../api'
+import messages from '../messages'
 
 const QuestionWrapper = styled.div`
   margin: 1rem;
@@ -16,38 +17,75 @@ class Question extends Component {
   constructor (props) {
     super(props)
 
-    const { question, rendered } = this.props
-
     this.state = {
+      liked: false,
       deleted: false,
       editable: false,
-      rendered,
-      question
+      rendered: false,
+      question: {
+        likes: [],
+        comments: [],
+        title: '',
+        body: ''
+      }
     }
   }
 
+  like = () => {
+    const { user, alert } = this.props
+    const { id } = this.state.question
+    this.setState({ liked: !this.state.liked })
+    questionLikeCreate(user, id)
+      .then(this.showOneQuestion)
+      .then(() => alert(messages.questionLikeSuccess, 'success'))
+      .catch(() => { alert(messages.questionLikeFailure, 'danger') })
+  }
+
+  unlike = () => {
+    const { user, alert } = this.props
+    const { id } = this.state.question.likes.find(like => like.user_id === user.id)
+    this.setState({ liked: !this.state.liked })
+    questionLikeDelete(user, id)
+      .then(() => alert(messages.questionUnlikeSuccess, 'success'))
+      .catch(() => { alert(messages.questionUnlikeFailure, 'danger') })
+  }
   toggleEditable = () => this.setState({ editable: !this.state.editable })
   unmountEditable = () => this.setState({ editable: !this.state.editable })
   deleteQuestion = () => this.setState({ deleted: true })
   updateQuestion = updatedQuestion => this.setState({ question: updatedQuestion })
 
+  setupLike = () => {
+    console.log('setupLike')
+    const { user } = this.props
+    console.log(this.state)
+    const likedByUser = this.state.question.likes.find(like => like.user_id === user.id)
+    if (likedByUser) {
+      this.setState({ liked: true })
+    } else {
+      this.setState({ liked: false })
+    }
+  }
+
   showOneQuestion = () => {
+    console.log('showOneQuestion')
     const { user } = this.props
     const { id } = this.props.match.params
     showQuestion(user, id)
-      // .then(data => { console.log(data); return data })
+      .then(data => { console.log(data); return data })
       .then(responseData => this.setState({ question: responseData.data.question, rendered: true }))
       .then(() => console.log(this.state))
+      .then(user ? this.setupLike : '')
       .catch(console.error)
   }
 
   componentDidMount () {
-    if (!this.props.match.params.id) { return '' }
+    const { user } = this.props
+    if (user) { this.setupLike() }
     this.showOneQuestion()
   }
 
   render () {
-    const { question, editable, deleted, rendered } = this.state
+    const { question, editable, deleted, rendered, liked } = this.state
     const { user, alert } = this.props
 
     if (!rendered) { return '' }
@@ -63,6 +101,8 @@ class Question extends Component {
       unmountEditable={this.unmountEditable}/>
 
     const editButton = <button className="btn btn-info" onClick={this.toggleEditable}>Edit</button>
+    const likeButton = <button className="btn btn-secondary" onClick={this.like}>Like</button>
+    const unlikeButton = <button className="btn btn-danger" onClick={this.unlike}>Unlike</button>
 
     if (deleted) { return '' }
 
@@ -73,10 +113,10 @@ class Question extends Component {
         <h1>BODY: {question.body}</h1>
         <h1>ANONYMOUS: {question.anonymous}</h1>
         <h1>CREATOR: {question.creator}</h1>
-        <Link to={`questions/${question.id}`}><h1>Link to Question {question.id}</h1></Link>
-        <Comments user={user} alert={alert} question={question}/>
+        { user ? liked ? unlikeButton : likeButton : '' }
         { owned ? editButton : '' }
         { owned && editable ? questionEdit : ''}
+        <Comments user={user} alert={alert} question={question}/>
       </QuestionWrapper>
     )
   }

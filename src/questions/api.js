@@ -54,3 +54,32 @@ export const showQuestion = (user, id) => {
     method: 'GET'
   })
 }
+
+export const questionLikeCreate = (user, id) => {
+  return axios({
+    url: `${apiUrl}/likes`,
+    method: 'POST',
+    headers: { 'Authorization': `Token token=${user.token}` },
+    data: {
+      like: {
+        question_id: id
+      }
+    }
+  })
+}
+
+export const questionLikeDelete = (user, id) => {
+  return axios({
+    url: `${apiUrl}/likes/${id}`,
+    method: 'DELETE',
+    headers: { 'Authorization': `Token token=${user.token}` }
+  })
+}
+
+export const questionLikeShow = (user, id) => {
+  return axios({
+    url: `${apiUrl}/likes/${id}`,
+    method: 'DELETE',
+    headers: { 'Authorization': `Token token=${user.token}` }
+  })
+}

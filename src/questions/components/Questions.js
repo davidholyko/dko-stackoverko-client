@@ -1,8 +1,8 @@
 import React, { Component, Fragment } from 'react'
-import { withRouter } from 'react-router-dom'
+import { withRouter, Link } from 'react-router-dom'
 
 import Spinner from 'react-bootstrap/Spinner'
-import Question from './Question'
+// import Question from './Question'
 
 import { indexQuestions } from '../api'
 import messages from '../messages'
@@ -41,13 +41,14 @@ class Questions extends Component {
 
   render () {
     const { questions, rendered } = this.state
-    const { user, alert } = this.props
+    // const { user, alert } = this.props
 
     if (!rendered) { return <Spinner animation="border"></Spinner> }
 
+    // {questions.map((question, index) => <Question key={index} alert={alert} question={question} user={user} rendered={true}/>)}
     return (
       <Fragment>
-        {questions.map((question, index) => <Question key={index} alert={alert} question={question} user={user} rendered={true}/>)}
+        {questions.map((question, index) => <Link key={index} to={`questions/${question.id}`}><h1>{question.title}</h1></Link>)}
       </Fragment>
     )
   }

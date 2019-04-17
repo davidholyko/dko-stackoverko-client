@@ -7,6 +7,10 @@ import Comments from '../../comments/components/Comments'
 import { showQuestion, questionLikeCreate, questionLikeDelete } from '../api'
 import messages from '../messages'
 
+import Prism from 'prismjs'
+import '../../css/prism-tomorrow.css'
+import PrismCode from 'react-prism'
+
 const QuestionWrapper = styled.div`
   margin: 1rem;
   background-color: black;
@@ -77,6 +81,7 @@ class Question extends Component {
   }
 
   componentDidMount () {
+    Prism.highlightAll()
     const { user } = this.props
     if (user) { this.setupLike() }
     this.showOneQuestion()
@@ -111,6 +116,12 @@ class Question extends Component {
         <h1>BODY: {question.body}</h1>
         <h1>ANONYMOUS: {question.anonymous}</h1>
         <h1>CREATOR: {question.creator}</h1>
+
+        <PrismCode component="pre" className="language-javascript">
+          {`const x = 5
+        console.log(e)`}
+        </PrismCode>
+
         <h1 className="d-flex">liked by {question.likes.map((like, index) => <span key={index} className="mx-1">{like.creator},</span>)}</h1>
         { user ? liked ? unlikeButton : likeButton : '' }
         { owned ? editButton : '' }

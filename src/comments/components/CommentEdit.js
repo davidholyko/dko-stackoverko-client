@@ -66,7 +66,6 @@ class CommentEdit extends Component {
 
   render () {
     const { comment } = this.state
-    // const { value } = this.props
 
     return (
       <CommentEditWrapper>

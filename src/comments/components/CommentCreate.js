@@ -9,8 +9,9 @@ class CommentCreate extends Component {
     super(props)
 
     this.state = {
+      exists: true,
       questionID: this.props.question_id,
-      text: 'filler text',
+      text: '',
       anonymous: false
     }
   }
@@ -27,6 +28,7 @@ class CommentCreate extends Component {
 
     postComment(user, this.state, question.id)
       .then(responseData => createComment(responseData.data.comment))
+      .then(() => this.setState({ exists: false }))
       .then(() => alert(messages.commentCreateSuccess, 'success'))
       .catch(error => {
         console.error(error)
@@ -36,21 +38,26 @@ class CommentCreate extends Component {
   }
 
   render () {
-    const { text } = this.state
+    const { text, exists } = this.state
     const { id } = this.props.question
+
+    if (!exists) { return '' }
 
     return (
       <form onSubmit={this.onCommentCreate} className="d-flex flex-column bg-primary text-light p-3">
         <label htmlFor="text">Comment for Question {id}</label>
-        <input
+        <textarea
           required
           type="text"
           name="text"
           value={text}
-          placeholder="Title"
+          placeholder="Leave a constructive comment here"
           onChange={this.handleChange}
+          className="textarea-body"
         />
-        <button>Create A Comment</button>
+        <div>
+          <button className="btn btn-warning">Create A Comment</button>
+        </div>
       </form>
     )
   }

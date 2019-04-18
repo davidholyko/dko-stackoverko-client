@@ -5,8 +5,9 @@ import styled from 'styled-components'
 import CommentEdit from './CommentEdit'
 
 const CommentWrapper = styled.div`
+  padding: 1rem;
   margin: 1rem;
-  background-color: orange;
+  background-color: #888;
   color: white;
 `
 
@@ -34,7 +35,7 @@ class Comment extends Component {
 
   render () {
     const { comment, editable, deleted } = this.state
-    const { user, question } = this.props
+    const { user } = this.props
     const owned = user ? comment.creator === user.handle : false
 
     const commentEdit = <CommentEdit
@@ -51,10 +52,8 @@ class Comment extends Component {
 
     return (
       <CommentWrapper>
-        <h1>CREATOR: {comment.creator}</h1>
-        <h1>TEXT: {comment.text}</h1>
-        <h1>ANONYMOUS: {comment.anonymous.toString()}</h1>
-        <h1>QUESTION ID: {question.id}</h1>
+        <p>{comment.creator} commented</p>
+        <p>{comment.text}</p>
         { owned ? editButton : ''}
         { owned && editable ? commentEdit : ''}
       </CommentWrapper>

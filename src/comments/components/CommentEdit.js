@@ -6,8 +6,8 @@ import { patchComment, deleteComment } from '../api'
 import messages from '../messages'
 
 const CommentEditWrapper = styled.div`
-  background-color: green;
-  color: white;
+  background-color: white;
+  color: black;
   display: flex;
   flex-direction: column;
 `

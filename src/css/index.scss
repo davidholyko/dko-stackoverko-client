@@ -12,5 +12,17 @@ p {
 }
 
 textarea[class="textarea-body"] {
-  height: 300px;
+  min-height: 200px;
+}
+
+.break {
+  word-wrap: break-word;
+  word-break: break-all;
+  white-space: pre-line;
+
+  & > * {
+    word-wrap: break-word;
+    word-break: break-all;
+    white-space: pre-line;
+  }
 }

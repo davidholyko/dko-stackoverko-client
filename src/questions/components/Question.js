@@ -10,7 +10,7 @@ import messages from '../messages'
 import Prism from 'prismjs'
 import '../../css/prism-tomorrow.css'
 import PrismCode from 'react-prism'
-// import Markdown from 'react-markdown'
+import Markdown from 'react-markdown'
 
 const QuestionWrapper = styled.div`
   border: 2px solid #999;
@@ -123,8 +123,8 @@ class Question extends Component {
         <h4>{question.title}</h4>
         <p>{question.anonymous ? 'anonymous' : question.creator}</p>
         <p>{bodyBeforeCode}</p>
-        <PrismCode component="pre" className="language-javascript">{code}</PrismCode>
-        <p>{bodyAfterCode}</p>
+        <PrismCode component="pre" className="language-javascript break">{code}</PrismCode>
+        <Markdown source={bodyAfterCode} className="break" />
 
         <p className="d-flex">{likedBy} {question.likes.map((like, index) => <span key={index} className="mx-1">{like.creator}</span>)}</p>
         { user ? liked ? unlikeButton : likeButton : '' }

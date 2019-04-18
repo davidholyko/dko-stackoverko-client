@@ -35,7 +35,7 @@ class Comments extends Component {
 
     return (
       <Fragment>
-        <h1>Comments?????</h1>
+        <h5>{comments.length ? 'Comments' : 'Be the first to leave a comment'}</h5>
 
         {user ? commentCreateForm : ''}
 

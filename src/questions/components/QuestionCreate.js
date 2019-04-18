@@ -52,13 +52,13 @@ class QuestionCreate extends Component {
 
     return (
       <form onSubmit={this.onQuestionCreate} className="d-flex flex-column">
-        <label htmlFor="title">Title</label>
+        <label htmlFor="title">Title of the question</label>
         <textarea
           required
           type="text"
           name="title"
           value={title}
-          placeholder="Title"
+          placeholder="Please write a descriptive, concise title"
           onChange={this.handleChange}
         ></textarea>
         <label htmlFor="body">Summarize the problem</label>

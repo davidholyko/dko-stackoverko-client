@@ -46,7 +46,7 @@ class Questions extends Component {
 
     return (
       <Fragment>
-        {questions.map((question, index) => <Link key={index} to={`questions/${question.id}`}><h1>{question.title}</h1></Link>)}
+        {questions.map((question, index) => <Link key={index} to={`questions/${question.id}`}><p>{question.title}</p></Link>)}
       </Fragment>
     )
   }

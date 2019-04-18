@@ -42,7 +42,6 @@ export const deleteQuestion = (user, data) => {
 export const indexQuestions = user => {
   return axios({
     url: `${apiUrl}/questions`,
-    // headers: { 'Authorization': `Token token=${user.token}` },
     method: 'GET'
   })
 }

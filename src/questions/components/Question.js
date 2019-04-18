@@ -114,19 +114,19 @@ class Question extends Component {
     const code = question.body.match(/<CodeStart>([\s\S]*?)<CodeEnd>/)[1]
     const bodyAfterCode = question.body.match(/<CodeEnd>([\s\S]*?)$/)[1]
 
+    const likedBy = question.likes.length ? 'Liked By' : 'Be the first to like'
+
     if (deleted) { return '' }
 
     return (
       <QuestionWrapper>
-        <h4>TITLE: {question.title}</h4>
-        <p>ANONYMOUS: {question.anonymous.toString()}</p>
+        <h4>{question.title}</h4>
+        <p>{question.anonymous ? 'anonymous' : question.creator}</p>
         <p>{bodyBeforeCode}</p>
         <PrismCode component="pre" className="language-javascript">{code}</PrismCode>
         <p>{bodyAfterCode}</p>
 
-        <p>CREATOR: {question.creator}</p>
-
-        <p className="d-flex">liked by {question.likes.map((like, index) => <span key={index} className="mx-1">{like.creator},</span>)}</p>
+        <p className="d-flex">{likedBy} {question.likes.map((like, index) => <span key={index} className="mx-1">{like.creator}</span>)}</p>
         { user ? liked ? unlikeButton : likeButton : '' }
         { owned ? editButton : '' }
         { owned && editable ? questionEdit : ''}

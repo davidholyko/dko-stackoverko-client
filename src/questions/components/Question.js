@@ -10,11 +10,14 @@ import messages from '../messages'
 import Prism from 'prismjs'
 import '../../css/prism-tomorrow.css'
 import PrismCode from 'react-prism'
+// import Markdown from 'react-markdown'
 
 const QuestionWrapper = styled.div`
+  border: 2px solid #999;
+  padding: 1rem;
   margin: 1rem;
-  background-color: black;
-  color: white;
+  background-color: white;
+  color: #005999;
 `
 
 class Question extends Component {
@@ -107,22 +110,23 @@ class Question extends Component {
     const likeButton = <button className="btn btn-secondary" onClick={this.like}>Like</button>
     const unlikeButton = <button className="btn btn-danger" onClick={this.unlike}>Unlike</button>
 
+    const bodyBeforeCode = question.body.match(/^([\s\S]*?)<CodeStart>/)[1]
+    const code = question.body.match(/<CodeStart>([\s\S]*?)<CodeEnd>/)[1]
+    const bodyAfterCode = question.body.match(/<CodeEnd>([\s\S]*?)$/)[1]
+
     if (deleted) { return '' }
 
     return (
       <QuestionWrapper>
-        <h1>ID: {question.id}</h1>
-        <h1>TITLE: {question.title}</h1>
-        <h1>BODY: {question.body}</h1>
-        <h1>ANONYMOUS: {question.anonymous}</h1>
-        <h1>CREATOR: {question.creator}</h1>
+        <h4>TITLE: {question.title}</h4>
+        <p>ANONYMOUS: {question.anonymous.toString()}</p>
+        <p>{bodyBeforeCode}</p>
+        <PrismCode component="pre" className="language-javascript">{code}</PrismCode>
+        <p>{bodyAfterCode}</p>
 
-        <PrismCode component="pre" className="language-javascript">
-          {`const x = 5
-        console.log(e)`}
-        </PrismCode>
+        <p>CREATOR: {question.creator}</p>
 
-        <h1 className="d-flex">liked by {question.likes.map((like, index) => <span key={index} className="mx-1">{like.creator},</span>)}</h1>
+        <p className="d-flex">liked by {question.likes.map((like, index) => <span key={index} className="mx-1">{like.creator},</span>)}</p>
         { user ? liked ? unlikeButton : likeButton : '' }
         { owned ? editButton : '' }
         { owned && editable ? questionEdit : ''}

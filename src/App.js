@@ -25,7 +25,7 @@ class App extends Component {
       user: null,
       alerts: [],
       timeout: 2000,
-      position: 'bottom-right'
+      position: 'bottom-left'
     }
   }
 
@@ -102,12 +102,6 @@ class App extends Component {
             <QuestionCreate alert={this.alert} user={user} />
           )} />
         </main>
-
-        <AlertList
-          position={position}
-          alerts={alerts}
-          timeout={timeout}
-        />
 
       </React.Fragment>
     )

@@ -4,7 +4,7 @@ $charcoal: #bbb;
   align-items: center;
   border-bottom: 1px solid $charcoal;
   display: flex;
-  height: 100px;
+  height: 50px;
   padding: 0 20px;
 
   a,
@@ -20,7 +20,6 @@ $charcoal: #bbb;
   flex-grow: 1;
   justify-content: flex-end;
 }
-
 @media (max-width: 600px) {
   .main-header {
     flex-direction: column;
@@ -33,7 +32,6 @@ $charcoal: #bbb;
     }
   }
 }
-
 @media (max-width: 450px) {
   .main-header > nav {
     flex-direction: column;

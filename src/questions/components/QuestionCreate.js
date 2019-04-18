@@ -31,7 +31,7 @@ class QuestionCreate extends Component {
     const body =
     `${summary}\n
     ${background}\n
-    <pre><code className="language-javascript">${code}</code></pre>\n
+    <CodeStart>${code}<CodeEnd>\n
     ${description}`
 
     postQuestion(user, { ...this.state, body })

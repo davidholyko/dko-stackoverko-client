@@ -20,6 +20,7 @@ npm start
 
 Fork and clone [Back End Repo](https://github.com/davidholyko/stackoverko-api)
 ```
+bundle install
 bin/rails db:create
 bin/rails db:migrate
 bin/rails server

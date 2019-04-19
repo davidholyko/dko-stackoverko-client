@@ -112,14 +112,16 @@ class Question extends Component {
     const code = question.body.match(/<CodeStart>([\s\S]*?)<CodeEnd>/)[1]
     const bodyAfterCode = question.body.match(/<CodeEnd>([\s\S]*?)$/)[1]
 
-    const likedBy = question.likes.length ? 'Liked By' : 'Be the first to like'
+    const likedBy = question.likes.length ? 'Liked By' : '0 Likes'
 
     if (deleted) return ''
 
     return (
       <QuestionWrapper>
         <h4>{question.title}</h4>
-        <p>{question.anonymous ? 'anonymous' : question.creator}</p>
+        <div className="d-flex">
+          <p className="bg-dark text-light px-2 rounded">{question.anonymous ? 'anonymous' : question.creator}</p>
+        </div>
         <p>{bodyBeforeCode}</p>
         <PrismCode component="pre" className="language-javascript break">{code}</PrismCode>
         <Markdown source={bodyAfterCode} className="break" />

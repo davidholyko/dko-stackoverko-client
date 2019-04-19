@@ -11,9 +11,18 @@ Our app allows a user to have their own specific authentication through sign up,
 to sign in, change their password, and sign out. While signed in, a user is able to create and read a question, like, or comment. A user can update, delete a comment as well and can delete their like.
 
 ## Installation
+
+Fork and clone [Front End Repo](https://github.com/davidholyko/stackoverko-client)
 ```
 npm i
 npm start
+```
+
+Fork and clone [Back End Repo](https://github.com/davidholyko/stackoverko-api)
+```
+bin/rails db:create
+bin/rails db:migrate
+bin/rails server
 ```
 
 ## Technology

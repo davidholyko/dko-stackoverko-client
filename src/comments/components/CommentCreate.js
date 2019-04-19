@@ -28,10 +28,10 @@ class CommentCreate extends Component {
 
     postComment(user, this.state, question.id)
       .then(responseData => createComment(responseData.data.comment))
-      .then(() => this.setState({ exists: false }))
+      // .then(() => this.setState({ exists: false }))
+      .then(() => this.setState({ text: '' }))
       .then(() => alert(messages.commentCreateSuccess, 'success'))
-      .catch(error => {
-        console.error(error)
+      .catch(() => {
         this.setState({ text: '' })
         alert(messages.signInFailure, 'danger')
       })

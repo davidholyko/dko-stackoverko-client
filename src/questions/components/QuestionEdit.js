@@ -48,8 +48,7 @@ class Question extends Component {
       .then(unmountEditable)
       .then(() => updateQuestion(question))
       .then(() => alert(messages.questionUpdateSuccess, 'success'))
-      .catch(error => {
-        console.error(error)
+      .catch(() => {
         this.setState({ title: '', body: '' })
         alert(messages.questionUpdateFailure, 'danger')
       })
@@ -63,7 +62,7 @@ class Question extends Component {
     deleteQuestion(user, question)
       .then(this.props.deleteQuestion)
       .then(() => alert(messages.questionDeleteSuccess, 'success'))
-      .catch(console.error)
+      .catch(() => alert(messages.questionFailure, 'danger'))
   }
 
   render () {

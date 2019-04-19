@@ -76,11 +76,9 @@ class Question extends Component {
     const { user } = this.props
     const { id } = this.props.match.params
     showQuestion(user, id)
-      // .then(data => { console.log(data); return data })
       .then(responseData => this.setState({ question: responseData.data.question, rendered: true }))
-      // .then(() => console.log(this.state))
       .then(user ? this.setupLike : '')
-      .catch(console.error)
+      .catch(() => alert(messages.questionFailure, 'danger'))
   }
 
   componentDidMount () {

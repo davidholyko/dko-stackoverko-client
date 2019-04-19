@@ -5,10 +5,10 @@ import styled from 'styled-components'
 import CommentEdit from './CommentEdit'
 
 const CommentWrapper = styled.div`
-  padding: 1rem;
-  margin: 1rem;
-  background-color: #888;
-  color: white;
+  padding: 0.25rem;
+  margin: 0.25rem;
+  background-color: white;
+  color: black;
 `
 
 class Comment extends Component {
@@ -52,8 +52,10 @@ class Comment extends Component {
 
     return (
       <CommentWrapper>
-        <p>{comment.creator} commented</p>
-        <p>{comment.text}</p>
+        <div>
+          <p className="mb-1 bg-dark text-light px-2 rounded d-inline-block">{comment.creator}</p>
+        </div>
+        <p className="text-dark">{comment.text}</p>
         { owned ? editButton : ''}
         { owned && editable ? commentEdit : ''}
       </CommentWrapper>

@@ -44,11 +44,9 @@ class CommentEdit extends Component {
     const { comment } = this.state
     const { user, updateComment, unmountEditable } = this.props
     patchComment(user, comment)
-      // .then(data => { console.log(data); return data })
       .then(unmountEditable)
       .then(() => updateComment(comment))
-      .catch(error => {
-        console.error(error)
+      .catch(() => {
         this.setState({ title: '', body: '' })
         alert(messages.signInFailure, 'danger')
       })
@@ -61,7 +59,7 @@ class CommentEdit extends Component {
     const { user } = this.props
     deleteComment(user, comment)
       .then(this.props.deleteComment)
-      .catch(console.log)
+      .catch(() => alert(messages.commentDeleteFailure, 'danger'))
   }
 
   render () {

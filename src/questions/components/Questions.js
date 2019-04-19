@@ -27,16 +27,9 @@ class Questions extends Component {
     const { user, alert } = this.props
 
     indexQuestions(user)
-      .then(responseData => this.setState({
-        questions: responseData.data.questions.sort(this.sortByID),
-        rendered: true
+      .then(responseData => this.setState({ questions: responseData.data.questions.sort(this.sortByID), rendered: true
       }))
-      // .then(() => alert(messages.questionsReadSuccess, 'success'))
-      .catch(error => {
-        console.error(error)
-        this.setState({ email: '', password: '' })
-        alert(messages.signInFailure, 'danger')
-      })
+      .catch(() => alert(messages.questionFailure, 'danger'))
   }
 
   render () {

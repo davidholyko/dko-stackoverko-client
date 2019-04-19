@@ -39,7 +39,7 @@ class QuestionCreate extends Component {
       .then(() => this.setState({ redirect: true }))
       .catch(() => {
         this.setState({ title: '', body: '' })
-        alert(messages.signInFailure, 'danger')
+        alert(messages.questionCreateFailure, 'danger')
       })
   }
 

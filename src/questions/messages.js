@@ -10,5 +10,6 @@ export default {
   questionLikeSuccess: 'Successfully liked a question',
   questionLikeFailure: 'Unsuccessfully liked a question',
   questionUnlikeSuccess: 'Successfully unliked a question',
-  questionUnlikeFailure: 'Unsuccessfully unliked a question'
+  questionUnlikeFailure: 'Unsuccessfully unliked a question',
+  questionFailure: 'Something went wrong! Oops'
 }

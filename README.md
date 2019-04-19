@@ -18,18 +18,20 @@ npm start
 
 ## Technology
 ### Front End
-JavaScript
-HTML
-CSS
-React.js
-Prism.js
-Markdown.js
-react-bootstrap
-react-bs-notifier
+- JavaScript
+- HTML
+- CSS
+- React.js
+- Prism.js
+- Markdown.js
+- react-bootstrap
+- react-bs-notifier
+- axios
+- react-router-dom
 
 ### Back End
-Ruby
-Ruby on Rails
+- Ruby
+- Ruby on Rails
 
 ## How it works
 Front end makes ajax requests to the API.
@@ -108,7 +110,8 @@ None for now.
 | DELETE  | `/comments/:id`        | `comments#delete`             |
 
 ## Potential Future Improvements
-Tags
-In Browser Repl
-Add Markdown parser for comments
-Rich Text Format
+- Tags
+- In Browser Repl
+- Add Markdown parser for comments
+- Rich Text Format
+- Implement post as Anonymous

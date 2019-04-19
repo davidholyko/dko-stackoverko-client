@@ -1,10 +1,10 @@
 # Stackoverko
 Hi all and welcome to the GitHub Repo for Letterbox.
 This project is designed to be a place for users to ask a technical question and receive a technical answer.
-[Front End Repo](https://github.com/davidholyko/stackoverko-client)
-[Front End Deployed](https://davidholyko.github.io/stackoverko-client)
-[Back End Repo](https://github.com/davidholyko/stackoverko-api)
-[Back End Deployed](https://stackoverko-api.herokuapp.com/)
+##### [Front End Repo](https://github.com/davidholyko/stackoverko-client)
+##### [Front End Deployed](https://davidholyko.github.io/stackoverko-client)
+##### [Back End Repo](https://github.com/davidholyko/stackoverko-api)
+##### [Back End Deployed](https://stackoverko-api.herokuapp.com/)
 
 ## Description
 Our app allows a user to have their own specific authentication through sign up,
@@ -57,8 +57,7 @@ JavaScript parses the JSON and renders pieces of it on the page using handlebars
 - Whiteboarding out the problem, to help connect dots and understand the process
 
 ## Entity Relationship Diagram
-[ERD]https://i.imgur.com/ecjCDpB.jpg
-See last page
+![ERD]https://i.imgur.com/ecjCDpB.jpg
 
 Current ERD
 ```
@@ -74,7 +73,7 @@ comments has many likes
 None for now.
 
 ## Wireframe
-Initial wireframe [here]https://i.imgur.com/ecjCDpB.jpg
+![Initial wireframe ]https://i.imgur.com/ecjCDpB.jpg
 
 ## User stories
 - As a unregistered user, I would like to sign up with email and password.

@@ -57,7 +57,7 @@ JavaScript parses the JSON and renders pieces of it on the page using handlebars
 - Whiteboarding out the problem, to help connect dots and understand the process
 
 ## Entity Relationship Diagram
-![ERD]https://i.imgur.com/ecjCDpB.jpg
+![ERD + Wireframe](https://i.imgur.com/ecjCDpB.jpg)
 
 Current ERD
 ```
@@ -73,7 +73,7 @@ comments has many likes
 None for now.
 
 ## Wireframe
-![Initial wireframe ]https://i.imgur.com/ecjCDpB.jpg
+![Wireframe + ERD](https://i.imgur.com/ecjCDpB.jpg)
 
 ## User stories
 - As a unregistered user, I would like to sign up with email and password.

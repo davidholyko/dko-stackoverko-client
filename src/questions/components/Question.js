@@ -94,7 +94,7 @@ class Question extends Component {
     const { question, editable, deleted, rendered, liked } = this.state
     const { user, alert } = this.props
 
-    if (!rendered) { return '' }
+    if (!rendered) return ''
 
     const owned = user ? question.creator === user.handle : false
 
@@ -116,7 +116,7 @@ class Question extends Component {
 
     const likedBy = question.likes.length ? 'Liked By' : 'Be the first to like'
 
-    if (deleted) { return '' }
+    if (deleted) return ''
 
     return (
       <QuestionWrapper>
@@ -126,9 +126,9 @@ class Question extends Component {
         <PrismCode component="pre" className="language-javascript break">{code}</PrismCode>
         <Markdown source={bodyAfterCode} className="break" />
 
-        <p className="d-flex">{likedBy} {question.likes.map((like, index) => <span key={index} className="mx-1">{like.creator}</span>)}</p>
+        <p className="d-flex flex-wrap">{likedBy} {question.likes.map((like, index) => <span key={index} className="ml-1 bg-dark text-light px-2 rounded">{like.creator}</span>)}</p>
         { user ? liked ? unlikeButton : likeButton : '' }
-        { owned ? editButton : '' }
+        { owned && !owned ? editButton : '' }
         { owned && editable ? questionEdit : ''}
         <Comments user={user} alert={alert} question={question}/>
       </QuestionWrapper>

@@ -1,34 +1,35 @@
 import React from 'react'
-import { Link } from 'react-router-dom'
+import { NavLink } from 'react-router-dom'
 
 import './Header.scss'
 
 const authenticatedOptions = (
   <React.Fragment>
-    <Link to="/change-password">Change Password</Link>
-    <Link to="/sign-out">Sign Out</Link>
-
-    <Link to="/questions">Questions</Link>
-    <Link to="/question-create">Create A Question</Link>
+    <NavLink activeClassName="selected" exact to="/change-password">Change Password</NavLink>
+    <NavLink activeClassName="selected" exact to="/sign-out">Sign Out</NavLink>
+    <NavLink activeClassName="selected" exact to="/question-create">Create A Question</NavLink>
   </React.Fragment>
 )
 
 const unauthenticatedOptions = (
   <React.Fragment>
-    <Link to="/sign-up">Sign Up</Link>
-    <Link to="/sign-in">Sign In</Link>
+    <NavLink activeClassName="selected" exact to="/sign-up">Sign Up</NavLink>
+    <NavLink activeClassName="selected" exact to="/sign-in">Sign In</NavLink>
   </React.Fragment>
 )
 
 const alwaysOptions = (
   <React.Fragment>
-    <Link to="/questions">Home</Link>
+    <NavLink activeClassName="selected" exact to="/questions">Home</NavLink>
   </React.Fragment>
 )
 
 const Header = ({ user }) => (
   <header className="main-header">
-    <h1>Stackoverko</h1>
+    <div className="d-flex">
+      <h1 className="m-0">Stackoverko</h1>
+      <p className="mb-0 mt-auto px-2">When stackoverflow isnt enough...</p>
+    </div>
     <nav>
       { user && <span>Welcome, {user.email}</span>}
       { user ? authenticatedOptions : unauthenticatedOptions }

@@ -1,4 +1,4 @@
-import React, { Component, Fragment } from 'react'
+import React, { Component } from 'react'
 import { withRouter, Link } from 'react-router-dom'
 
 import Spinner from 'react-bootstrap/Spinner'
@@ -45,9 +45,10 @@ class Questions extends Component {
     if (!rendered) { return <Spinner animation="border"></Spinner> }
 
     return (
-      <Fragment>
+      <div className="my-5 d-flex flex-column-reverse">
         {questions.map((question, index) => <Link key={index} to={`questions/${question.id}`}><p>{question.title}</p></Link>)}
-      </Fragment>
+        <h1>Recently Asked Questions</h1>
+      </div>
     )
   }
 }

@@ -68,7 +68,7 @@ class CommentEdit extends Component {
     return (
       <CommentEditWrapper>
         <form onSubmit={this.onCommentUpdate} className="d-flex flex-column p-3">
-          <label htmlFor="title">Comment Text</label>
+          <label htmlFor="title">Edit Your Comment</label>
           <textarea required type="text" name="text" value={comment.text} onChange={this.handleChange}/>
           <div className="d-flex justify-content-between w-100">
             <button className="btn btn-success">Update</button>

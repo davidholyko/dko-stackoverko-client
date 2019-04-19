@@ -45,7 +45,7 @@ class CommentCreate extends Component {
 
     return (
       <form onSubmit={this.onCommentCreate} className="d-flex flex-column bg-primary text-light p-3">
-        <label htmlFor="text">Comment for Question {id}</label>
+        <label htmlFor="text">Leave a comment for Question {id}</label>
         <textarea
           required
           type="text"

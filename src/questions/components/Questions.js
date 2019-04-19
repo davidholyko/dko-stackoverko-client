@@ -39,7 +39,12 @@ class Questions extends Component {
 
     return (
       <div className="my-5 d-flex flex-column-reverse">
-        {questions.map((question, index) => <Link key={index} to={`questions/${question.id}`}><p>{question.title}</p></Link>)}
+        {questions.map((question, index) => {
+          return (
+            <Link key={index} to={`questions/${question.id}`}><p className="">{question.title}</p></Link>
+          )
+        }
+        )}
         <h1>Recently Asked Questions</h1>
       </div>
     )

@@ -105,8 +105,8 @@ class Question extends Component {
       unmountEditable={this.unmountEditable}/>
 
     const editButton = <button className="btn btn-info" onClick={this.toggleEditable}>Edit</button>
-    const likeButton = <button className="btn btn-secondary" onClick={this.like}>Like</button>
-    const unlikeButton = <button className="btn btn-danger" onClick={this.unlike}>Unlike</button>
+    const likeButton = <button className="btn btn-secondary mr-2 px-3" onClick={this.like}>Like 👍</button>
+    const unlikeButton = <button className="btn btn-danger mr-2" onClick={this.unlike}>Unlike 👎</button>
 
     const bodyBeforeCode = question.body.match(/^([\s\S]*?)<CodeStart>/)[1]
     const code = question.body.match(/<CodeStart>([\s\S]*?)<CodeEnd>/)[1]
@@ -124,8 +124,10 @@ class Question extends Component {
         <PrismCode component="pre" className="language-javascript break">{code}</PrismCode>
         <Markdown source={bodyAfterCode} className="break" />
 
-        <p className="d-flex flex-wrap">{likedBy} {question.likes.map((like, index) => <span key={index} className="ml-1 bg-dark text-light px-2 rounded">{like.creator}</span>)}</p>
-        { user ? liked ? unlikeButton : likeButton : '' }
+        <div className="d-flex flex-wrap">
+          { user ? liked ? unlikeButton : likeButton : '' }
+          <p className="d-flex flex-wrap m-0 mt-auto">{likedBy} {question.likes.map((like, index) => <span key={index} className="ml-1 bg-dark text-light px-2 rounded">{like.creator}</span>)}</p>
+        </div>
         { owned && !owned ? editButton : '' }
         { owned && editable ? questionEdit : ''}
         <Comments user={user} alert={alert} question={question}/>

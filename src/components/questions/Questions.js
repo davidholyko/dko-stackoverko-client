@@ -2,8 +2,8 @@ import React, { Component } from 'react'
 import { withRouter, Link } from 'react-router-dom'
 import Spinner from 'react-bootstrap/Spinner'
 
-import { indexQuestions } from '../api'
-import messages from '../messages'
+import { indexQuestions } from '../../api/QuestionsApi'
+import messages from '../../data/messages/QuestionsMessages'
 
 class Questions extends Component {
   constructor () {

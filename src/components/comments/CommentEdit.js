@@ -2,8 +2,8 @@ import React, { Component } from 'react'
 import { withRouter } from 'react-router-dom'
 import styled from 'styled-components'
 
-import { patchComment, deleteComment } from '../api'
-import messages from '../messages'
+import { patchComment, deleteComment } from '../../api/CommentsApi'
+import messages from '../../data/messages/CommentsMessages'
 
 const CommentEditWrapper = styled.div`
   background-color: white;

@@ -1,8 +1,8 @@
 import React, { Component } from 'react'
 import { withRouter } from 'react-router-dom'
 
-import { postComment } from '../api'
-import messages from '../messages'
+import { postComment } from '../../api/CommentsApi'
+import messages from '../../data/messages/CommentsMessages'
 
 class CommentCreate extends Component {
   constructor (props) {

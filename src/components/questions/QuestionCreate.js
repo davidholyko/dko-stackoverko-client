@@ -1,10 +1,10 @@
 import React, { Component } from 'react'
 import { withRouter, Redirect } from 'react-router-dom'
-import AutoComplete from './AutoComplete'
+import AutoComplete from '../autocomplete/AutoComplete'
 
-import { autoCompleteTags } from './AutoCompleteTags'
-import { postQuestion } from '../api'
-import messages from '../messages'
+import { autoCompleteTags } from '../../data/autocomplete/AutoCompleteTags'
+import { postQuestion } from '../../api/QuestionsApi'
+import messages from '../../data/messages/QuestionsMessages'
 
 class QuestionCreate extends Component {
   constructor () {

@@ -3,9 +3,9 @@ import { withRouter } from 'react-router-dom'
 import styled from 'styled-components'
 
 import QuestionEdit from './QuestionEdit'
-import Comments from '../../comments/components/Comments'
-import { showQuestion, questionLikeCreate, questionLikeDelete } from '../api'
-import messages from '../messages'
+import Comments from '../comments/Comments'
+import { showQuestion, questionLikeCreate, questionLikeDelete } from '../../api/QuestionsApi'
+import messages from '../../data/messages/QuestionsMessages'
 
 import Prism from 'prismjs'
 import '../../css/prism-tomorrow.css'

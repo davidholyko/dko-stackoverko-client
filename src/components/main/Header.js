@@ -1,7 +1,6 @@
 import React from 'react'
 import { NavLink } from 'react-router-dom'
-
-import './Header.scss'
+import img from '../../images/icon.png'
 
 const authenticatedOptions = (
   <React.Fragment>
@@ -27,8 +26,8 @@ const alwaysOptions = (
 const Header = ({ user }) => (
   <header className="main-header">
     <div className="d-flex">
-      <h1 className="m-0">Stackoverko</h1>
-      <p className="mb-0 mt-auto px-2">{'When Stackoverflow isn\'t enough...'}</p>
+      <img src={img} alt=""/>
+      <h1 className="m-0">StackOverKo</h1>
     </div>
     <nav>
       { user && <span>Welcome, {user.email}</span>}

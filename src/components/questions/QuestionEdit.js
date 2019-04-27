@@ -2,8 +2,8 @@ import React, { Component } from 'react'
 import { withRouter } from 'react-router-dom'
 import styled from 'styled-components'
 
-import { patchQuestion, deleteQuestion } from '../api'
-import messages from '../messages'
+import { patchQuestion, deleteQuestion } from '../../api/QuestionsApi'
+import messages from '../../data/messages/QuestionsMessages'
 
 const QuestionEdit = styled.div`
   background-color: green;

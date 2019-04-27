@@ -1,20 +1,18 @@
 import React, { Component } from 'react'
-import './App.scss'
 import { Route } from 'react-router-dom'
 
-import AuthenticatedRoute from './auth/components/AuthenticatedRoute'
-import Header from './header/Header'
+import AuthenticatedRoute from '../auth/AuthenticatedRoute'
+import SignUp from '../auth/SignUp'
+import SignIn from '../auth/SignIn'
+import SignOut from '../auth/SignOut'
+import ChangePassword from '../auth/ChangePassword'
 
-import SignUp from './auth/components/SignUp'
-import SignIn from './auth/components/SignIn'
-import SignOut from './auth/components/SignOut'
-import ChangePassword from './auth/components/ChangePassword'
+import Question from '../questions/Question'
+import Questions from '../questions/Questions'
+import QuestionCreate from '../questions/QuestionCreate'
 
-import Question from './questions/components/Question'
-import Questions from './questions/components/Questions'
-import QuestionCreate from './questions/components/QuestionCreate'
+import Header from './Header'
 
-// import Alert from 'react-bootstrap/Alert'
 import { AlertList } from 'react-bs-notifier'
 
 class App extends Component {

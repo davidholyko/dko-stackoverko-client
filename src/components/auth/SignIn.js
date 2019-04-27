@@ -1,8 +1,8 @@
 import React, { Component } from 'react'
 import { withRouter } from 'react-router-dom'
 
-import { signIn } from '../api'
-import messages from '../messages'
+import { signIn } from '../../api/AuthApi'
+import messages from '../../data/messages/AuthMessages'
 
 class SignIn extends Component {
   constructor () {

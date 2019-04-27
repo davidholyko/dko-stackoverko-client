@@ -1,8 +1,8 @@
 import { Component } from 'react'
 import { withRouter } from 'react-router-dom'
 
-import { signOut } from '../api'
-import messages from '../messages'
+import { signOut } from '../../api/AuthApi'
+import messages from '../../data/messages/AuthMessages'
 
 class SignOut extends Component {
   componentDidMount () {

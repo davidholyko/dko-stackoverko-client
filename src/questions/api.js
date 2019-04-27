@@ -2,16 +2,14 @@ import apiUrl from '../apiConfig'
 import axios from 'axios'
 
 export const postQuestion = (user, data) => {
+  console.log(data)
+  const { question } = data
   return axios({
     url: `${apiUrl}/questions`,
     method: 'POST',
     headers: { 'Authorization': `Token token=${user.token}` },
     data: {
-      question: {
-        title: data.title,
-        body: data.body,
-        anonymous: data.anonymous
-      }
+      question
     }
   })
 }
@@ -24,7 +22,11 @@ export const patchQuestion = (user, data) => {
     data: {
       question: {
         title: data.title,
-        body: data.body,
+        summary: data.summary,
+        background: data.background,
+        code: data.code,
+        results: data.results,
+        tags: data.tags,
         anonymous: data.anonymous
       }
     }

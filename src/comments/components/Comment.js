@@ -1,14 +1,15 @@
 import React, { Component } from 'react'
 import { withRouter } from 'react-router-dom'
 import styled from 'styled-components'
-
 import CommentEdit from './CommentEdit'
+import Markdown from 'react-markdown'
 
 const CommentWrapper = styled.div`
-  padding: 0.25rem;
   margin: 0.25rem;
   background-color: white;
   color: black;
+  padding: 0.5rem 0;
+  border-top: 1px solid black;
 `
 
 class Comment extends Component {
@@ -52,10 +53,10 @@ class Comment extends Component {
 
     return (
       <CommentWrapper>
-        <div>
-          <p className="mb-1 bg-dark text-light px-2 rounded d-inline-block">{comment.creator}</p>
+        <Markdown source={comment.text} className="break" />
+        <div className="d-flex justify-content-end">
+          <p className="tag text-dark">{comment.creator}</p>
         </div>
-        <p className="text-dark">{comment.text}</p>
         { owned ? editButton : ''}
         { owned && editable ? commentEdit : ''}
       </CommentWrapper>

@@ -19,6 +19,8 @@ class CommentCreate extends Component {
   componentDidMount () {
   }
 
+  onChange = (editorState) => this.setState({ editorState })
+
   handleChange = event => this.setState({ [event.target.name]: event.target.value })
 
   onCommentCreate = event => {
@@ -44,21 +46,23 @@ class CommentCreate extends Component {
     if (!exists) { return '' }
 
     return (
-      <form onSubmit={this.onCommentCreate} className="d-flex flex-column bg-primary text-light p-3">
-        <label htmlFor="text">Leave a comment for Question {id}</label>
-        <textarea
-          required
-          type="text"
-          name="text"
-          value={text}
-          placeholder="Leave a constructive comment here"
-          onChange={this.handleChange}
-          className="textarea-body"
-        />
-        <div>
-          <button className="btn btn-warning">Create A Comment</button>
-        </div>
-      </form>
+      <div>
+        <form onSubmit={this.onCommentCreate} className="d-flex flex-column bg-primary text-light p-3">
+          <label htmlFor="text">Leave a comment for Question {id}</label>
+          <textarea
+            required
+            type="text"
+            name="text"
+            value={text}
+            placeholder="Leave a constructive comment here"
+            onChange={this.handleChange}
+            className="textarea-body"
+          />
+          <div>
+            <button className="btn btn-warning">Create A Comment</button>
+          </div>
+        </form>
+      </div>
     )
   }
 }

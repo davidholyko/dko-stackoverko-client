@@ -1,12 +1,10 @@
 import React, { Component } from 'react'
 import { withRouter, Redirect } from 'react-router-dom'
-import AutoComplete from './AutoComplete'
 
-import { autoCompleteTags } from './AutoCompleteTags'
 import { postQuestion } from '../api'
 import messages from '../messages'
 
-class QuestionCreate extends Component {
+class QuestionForm extends Component {
   constructor () {
     super()
 
@@ -23,38 +21,28 @@ class QuestionCreate extends Component {
   }
 
   handleChange = event => this.setState({ [event.target.name]: event.target.value })
-  handleAnonymousToggle = () => this.setState({ ...this.state, anonymous: !this.state.anonymous })
-
-  updateTags = tag => {
-    if (!tag) return this.props.alert('Please include a tag from the list', 'danger')
-
-    // set current tags to this.state.tags
-    let currentTags = this.state.tags
-    // add tag to the string
-    currentTags += '  ' + tag
-    // change tags
-    if (currentTags.substring(0, 2) === '  ') {
-      currentTags = currentTags.substring(2, currentTags.length)
-    }
-    this.setState({ tags: currentTags })
+  handleAnonymousToggle = () => {
+    this.setState({ ...this.state, anonymous: !this.state.anonymous })
+    console.log(this.state)
   }
 
-  onQuestionCreate = event => {
+  onQuestionForm = event => {
     event.preventDefault()
 
     const { alert, user } = this.props
 
-    postQuestion(user, { question: this.state })
+    const { summary, background, code, results } = this.state
+    const body =
+    `${summary}\n
+    ${background}\n
+    ${code}\n
+    ${results}`
+
+    postQuestion(user, { ...this.state, body })
       .then(() => alert(messages.questionCreateSuccess, 'success'))
       .then(() => this.setState({ redirect: true }))
       .catch(() => {
-        this.setState({
-          title: '',
-          summary: '',
-          background: '',
-          code: '',
-          results: '',
-          tags: '' })
+        this.setState({ title: '', body: '' })
         alert(messages.questionCreateFailure, 'danger')
       })
   }
@@ -67,7 +55,7 @@ class QuestionCreate extends Component {
     }
 
     return (
-      <form className="d-flex flex-column" onSubmit={this.onQuestionCreate}>
+      <form className="d-flex flex-column" onSubmit={this.onQuestionForm}>
         <label htmlFor="title">Title of the question</label>
         <textarea
           required
@@ -75,7 +63,6 @@ class QuestionCreate extends Component {
           name="title"
           value={title}
           placeholder="Please write a descriptive, concise title"
-          maxLength="50"
           onChange={this.handleChange}
         ></textarea>
         <label htmlFor="body">Summarize the problem</label>
@@ -90,6 +77,7 @@ class QuestionCreate extends Component {
         ></textarea>
         <label htmlFor="background">Provide background including what you&#39;ve already tried</label>
         <textarea
+          required
           name="background"
           value={background}
           type="text"
@@ -99,6 +87,7 @@ class QuestionCreate extends Component {
         ></textarea>
         <label htmlFor="code">Show some code</label>
         <textarea
+          required
           name="code"
           value={code}
           type="text"
@@ -108,6 +97,7 @@ class QuestionCreate extends Component {
         ></textarea>
         <label htmlFor="results">Describe expected and actual results</label>
         <textarea
+          required
           name="results"
           value={results}
           type="text"
@@ -116,13 +106,16 @@ class QuestionCreate extends Component {
           onChange={this.handleChange}
         ></textarea>
         <label htmlFor="results">Add some tags</label>
+        <textarea
+          required
+          name="tags"
+          value={tags}
+          type="text"
+          placeholder="Add some tags"
+          className=""
+          onChange={this.handleChange}
+        ></textarea>
         <div className="d-flex">
-          {tags.split('  ').map((tag, index) => <p key={tag + index} className="tag">{tag}</p>)}
-        </div>
-        <div className="d-flex my-3">
-          <AutoComplete suggestions={autoCompleteTags} updateTags={this.updateTags}/>
-        </div>
-        <div className="d-flex my-3">
           <span className="btn btn-info" onClick={this.handleAnonymousToggle}>Post Anonymously</span>
           {anonymous ? <span className="btn btn-success">Yes ✔️</span> : <span className="btn btn-danger">No 🚫</span>}
         </div>
@@ -132,4 +125,4 @@ class QuestionCreate extends Component {
   }
 }
 
-export default withRouter(QuestionCreate)
+export default withRouter(QuestionForm)

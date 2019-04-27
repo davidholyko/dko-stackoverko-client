@@ -30,10 +30,15 @@ class Question extends Component {
       editable: false,
       rendered: false,
       question: {
+        anonymous: false,
         likes: [],
         comments: [],
         title: '',
-        body: ''
+        summary: '',
+        background: '',
+        code: '',
+        results: '',
+        tags: []
       }
     }
   }
@@ -90,6 +95,7 @@ class Question extends Component {
 
   render () {
     const { question, editable, deleted, rendered, liked } = this.state
+    const { summary, background, code, results, tags, likes, creator, title, anonymous } = question
     const { user, alert } = this.props
 
     if (!rendered) return ''
@@ -108,27 +114,27 @@ class Question extends Component {
     const likeButton = <button className="btn btn-secondary mr-2 px-3" onClick={this.like}>Like 👍</button>
     const unlikeButton = <button className="btn btn-danger mr-2" onClick={this.unlike}>Unlike 👎</button>
 
-    const bodyBeforeCode = question.body.match(/^([\s\S]*?)<CodeStart>/)[1]
-    const code = question.body.match(/<CodeStart>([\s\S]*?)<CodeEnd>/)[1]
-    const bodyAfterCode = question.body.match(/<CodeEnd>([\s\S]*?)$/)[1]
-
     const likedBy = question.likes.length ? 'Liked By' : '0 Likes'
 
     if (deleted) return ''
 
     return (
       <QuestionWrapper>
-        <h4>{question.title}</h4>
+        <h4>{title}</h4>
         <div className="d-flex">
-          <p className="bg-dark text-light px-2 rounded">{question.anonymous ? 'anonymous' : question.creator}</p>
+          {tags.split('  ').map((tag, index) => <p key={tag + index} className="tag">{tag}</p>)}
         </div>
-        <p>{bodyBeforeCode}</p>
+        <div className="d-flex">
+          <p className="bg-dark text-light px-2 rounded">{anonymous ? 'anonymous' : creator}</p>
+        </div>
+        <p>{summary}</p>
+        <p>{background}</p>
         <PrismCode component="pre" className="language-javascript break">{code}</PrismCode>
-        <Markdown source={bodyAfterCode} className="break" />
+        <Markdown source={results} className="break" />
 
         <div className="d-flex flex-wrap">
           { user ? liked ? unlikeButton : likeButton : '' }
-          <p className="d-flex flex-wrap m-0 mt-auto">{likedBy} {question.likes.map((like, index) => <span key={index} className="ml-1 bg-dark text-light px-2 rounded">{like.creator}</span>)}</p>
+          <p className="d-flex flex-wrap m-0 mt-auto">{likedBy} {likes.map((like, index) => <span key={index} className="ml-1 bg-success text-light px-2 rounded">{like.creator}</span>)}</p>
         </div>
         { owned && !owned ? editButton : '' }
         { owned && editable ? questionEdit : ''}

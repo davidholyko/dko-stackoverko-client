@@ -1,10 +1,12 @@
-$charcoal: #bbb;
-
-.main-header {
+.header {
+  width: 100vw;
+  max-width: 100%;
   align-items: center;
-  border-bottom: 1px solid $charcoal;
+  background-color: #555;
+  justify-content: space-around;
+  color: white;
   display: flex;
-  height: 50px;
+  min-height: 50px;
   padding: 0 20px;
 
   a,
@@ -14,14 +16,29 @@ $charcoal: #bbb;
   }
 }
 
-.main-header > nav {
+.header-title {
+  align-items: center;
+  display: flex;
+  flex-grow: 1;
+  justify-content: flex-start;
+}
+
+.header-links {
   align-items: center;
   display: flex;
   flex-grow: 1;
   justify-content: flex-end;
+
+  & > a {
+    color: white;
+  }
+
+  & > a:hover {
+    color: yellow;
+  }
 }
 @media (max-width: 600px) {
-  .main-header {
+  .header {
     flex-direction: column;
     font-size: 0.7em;
     height: auto;
@@ -33,13 +50,12 @@ $charcoal: #bbb;
   }
 }
 @media (max-width: 450px) {
-  .main-header > nav {
+  .header > * {
     flex-direction: column;
     width: 100%;
 
     a,
     span {
-      border: 1px solid $charcoal;
       margin-bottom: 5px;
       text-align: center;
       width: 80%;

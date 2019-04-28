@@ -1,7 +1,7 @@
 import React, { Component, Fragment } from 'react'
 import { withRouter, Link } from 'react-router-dom'
 
-import Spinner from 'react-bootstrap/Spinner'
+import Loading from '../main/Loading'
 import QuestionsFilter from './QuestionsFilter'
 
 import { indexQuestions } from '../../api/QuestionsApi'
@@ -60,7 +60,7 @@ class Questions extends Component {
 
     const { filteredQuestions, rendered } = this.state
 
-    if (!rendered) { return <Spinner animation="border"></Spinner> }
+    if (!rendered) return <Loading />
 
     return (
       <Fragment>

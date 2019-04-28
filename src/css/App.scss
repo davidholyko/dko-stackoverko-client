@@ -16,6 +16,10 @@
   background-color: #DDD;
 }
 
+.loading-text {
+  text-align: center;
+}
+
 .mini-counts {
   display: flex;
   flex-direction: column;
@@ -43,6 +47,10 @@
 
 .selected {
   color: black;
+}
+
+.text-medium {
+  font-size: 3rem;
 }
 
 .tag {

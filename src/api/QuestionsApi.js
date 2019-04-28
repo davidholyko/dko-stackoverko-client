@@ -2,7 +2,6 @@ import apiUrl from './apiConfig'
 import axios from 'axios'
 
 export const postQuestion = (user, data) => {
-  console.log(data)
   const { question } = data
   return axios({
     url: `${apiUrl}/questions`,

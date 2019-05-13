@@ -35,7 +35,7 @@ class Comments extends Component {
 
     return (
       <Fragment>
-        <h5 className="border-bottom mt-3">{comments.length ? 'Comments' : '0 Comments'}</h5>
+        <p className="border-bottom mt-3">{comments.length ? 'Comments' : '0 Comments'}</p>
 
         {user ? commentCreateForm : ''}
 

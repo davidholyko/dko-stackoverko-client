@@ -12,7 +12,7 @@ to sign in, change their password, and sign out. While signed in, a user is able
 
 ## Installation
 
-Fork and clone [Front End Repo](https://github.com/davidholyko/stackoverko-client)
+Fork and clone [Front End Repo](https://github.com/davidholyko/dko-stackoverko-client)
 ```
 npm i
 npm start
